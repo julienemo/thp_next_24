@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import moment from "moment";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Form = ({ select }) => {
   const [currentTitle, setCurrentTitle] = useState(select.title);
@@ -18,7 +18,7 @@ const Form = ({ select }) => {
   const saveChange = (e) => {
     e.preventDefault();
     const now = new Date();
-    const timestamp = moment(now).format("YYYYMMDDhhmmss");
+    const timestamp = moment(now).format('YYYYMMDDhhmmss');
     const title = currentTitle;
     const content = currentContent;
     console.log(title);
@@ -30,12 +30,12 @@ const Form = ({ select }) => {
     <form onSubmit={saveChange}>
       <input
         type="text"
-        placeholder="type something"
+        placeholder="Title of your new note"
         onChange={changeTitle}
         value={currentTitle}
       />
       <textarea
-        placeholder="type some thing"
+        placeholder="Content of your new note"
         onChange={changeContent}
         value={currentContent}
       />

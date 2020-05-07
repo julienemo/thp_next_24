@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const New = () => (
+const New = ({ buttonclick }) => (
   <>
     <div className="new">
-      <button type="button">Add a note</button>
+      <button type="button" onClick={buttonclick}>Add a note</button>
     </div>
   </>
 );

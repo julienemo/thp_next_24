@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Nav from "./Nav";
-import Zoom from "./Zoom";
+import React, { useState, useEffect } from 'react';
+import Nav from './Nav';
+import Zoom from './Zoom';
 
-import { chopString } from "../tools";
+import { chopString } from '../tools';
 
 const Content = () => {
   const originalList = () => {
@@ -21,15 +21,20 @@ const Content = () => {
   };
 
   const [list, setList] = useState(originalList());
-  const [select, setSelect] = useState("none");
+  const [select, setSelect] = useState('none');
 
   const changeSelect = (e) => {
     setSelect(list[e.target.id]);
   };
 
+  const clearSelect = () => {
+    console.log('in clear select');
+    setSelect('new');
+  };
+
   return (
     <>
-      <Nav {...{ list: originalList() }} click={changeSelect} />
+      <Nav {...{ list: originalList() }} newclick={clearSelect} click={changeSelect} />
       <Zoom {...select} />
     </>
   );

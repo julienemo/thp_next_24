@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import New from './New';
 import SingleNote from './SingleNote';
 
-const Nav = ({ list, click }) => {
+const Nav = ({ list, click, newclick }) => {
   const contentToShow = Object.entries(list).map((entry) => (
     <div className="single_note" id={entry[0]} onClick={click} key={entry[0]}>
       <SingleNote
@@ -14,7 +14,7 @@ const Nav = ({ list, click }) => {
   return (
     <>
       <div className="nav">
-        <New />
+        <New buttonclick={newclick} />
         <div className="list">{contentToShow}</div>
       </div>
     </>
