@@ -22,6 +22,7 @@ const Content = () => {
       archive[keys[i]] = {
         title: note.title,
         content: note.content,
+        id: keys[i],
       };
     }
     return archive;
@@ -47,20 +48,23 @@ const Content = () => {
     e.preventDefault();
     if (editContent || editTitle) {
       setNewSubmit(true);
-    }
-  };
-
-  useEffect(() => {
-    if (editContent && editTitle && newSubmit) {
-      const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
-      window.localStorage.setItem(
-        timestamp,
-        JSON.stringify({ title: editTitle, content: editContent }),
-      );
+      if (select === 'create') {
+        const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
+        window.localStorage.setItem(
+          timestamp,
+          JSON.stringify({ title: editTitle, content: editContent }),
+        );
+      } else {
+        window.localStorage.setItem(
+          select.id,
+          JSON.stringify({ title: editTitle, content: editContent }),
+        );
+      }
       setEditTitle('');
       setEditContent('');
+      setEditTitle('');
     }
-  }, [newSubmit]);
+  };
 
   const changeSelect = (e) => {
     if (e.target.id) {
@@ -75,7 +79,7 @@ const Content = () => {
   };
 
   const updateList = (noteKey, newTitle, newContent) => {
-    list[noteKey] = { title: newTitle, content: newContent };
+    list[noteKey] = { title: newTitle, content: newContent, id: noteKey };
   };
 
   return (

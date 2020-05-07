@@ -10,6 +10,7 @@ const Form = ({
 }) => {
   const [currentTitle, setCurrentTitle] = useState(select.title);
   const [currentContent, setCurrentContent] = useState(select.content);
+  const [currentNoteId] = useState(select.id);
 
   const changeTitle = (value) => {
     setCurrentTitle(value);
@@ -21,8 +22,12 @@ const Form = ({
   return (
     <form onSubmit={(e) => {
       onformsubmit(e);
-      const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
-      updateContentList(timestamp, currentTitle, currentContent);
+      if (currentNoteId) {
+        updateContentList(currentNoteId, currentTitle, currentContent);
+      } else {
+        const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
+        updateContentList(timestamp, currentTitle, currentContent);
+      }
     }}
     >
       <input
