@@ -5,8 +5,15 @@ import Nav from './Nav';
 import SingleNote from './SingleNote';
 import Form from './Form';
 
+// this is the main content
+// it keeps track of
+// 1. the list of notes (update from form)
+// 2. whether any single note is being view on the right (update from nav)
+// 3. whether there is a note being edited/created (update from form)
+// 4. whether there has just been a submit (update from form)
+
 const Content = () => {
-  const originalList = () => {
+  const originalListOnTheLeft = () => {
     const archive = {};
     const keys = Object.keys(localStorage);
     let i = keys.length;
@@ -20,7 +27,7 @@ const Content = () => {
     return archive;
   };
 
-  const [list, setList] = useState(originalList());
+  const [list] = useState(originalListOnTheLeft());
   const [select, setSelect] = useState('none');
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
@@ -45,8 +52,7 @@ const Content = () => {
 
   useEffect(() => {
     if (editContent && editTitle && newSubmit) {
-      const now = new Date();
-      const timestamp = moment(now).format('YYYYMMDDhhmmss');
+      const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
       window.localStorage.setItem(
         timestamp,
         JSON.stringify({ title: editTitle, content: editContent }),
@@ -92,11 +98,9 @@ const Content = () => {
           <SingleNote {...display()} />
         </div>
         <div>
-          <Form {...{ select }} onformsubmit={submitNote} updateContentList={updateList} ontitlechange={streamTitle} oncontentchange={streamContent} />
+          <Form key={select.title} {...{ select }} onformsubmit={submitNote} updateContentList={updateList} ontitlechange={streamTitle} oncontentchange={streamContent} />
         </div>
       </div>
-      {' '}
-
     </>
   );
 };

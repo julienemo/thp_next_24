@@ -17,7 +17,6 @@ const Form = ({
   const changeContent = (value) => {
     setCurrentContent(value);
   };
-  // setCurrentContent(select.content);
 
   return (
     <form onSubmit={(e) => {

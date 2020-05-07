@@ -26,3 +26,9 @@ _Uncomment `index.jsx` to inject some notes into browser_
 
 3. How to not trigger `overflow: scroll;` when there is no overflow yet ? 
 - well, use `overflow: auto` instead
+
+* * *
+### Unfortunate discoveries (or not)
+1. `useState takes the default value as its argument. It will be set only on the first render and will not update when props change` --- cited from[here](https://stackoverflow.com/questions/55316225/usestate-not-setting-variable)
+
+2. `key` attribute changing forces a component to remount.
