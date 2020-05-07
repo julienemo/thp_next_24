@@ -4,7 +4,9 @@
 
 run `npm install` then `npm start` to see the result
 
-_Uncomment `index.jsx` to inject some notes into browser_
+_Uncomment `index.jsx` to inject some notes into browser or clear storage_
+
+
 
 * * *
 #### Page behaviour

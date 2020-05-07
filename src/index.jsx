@@ -40,6 +40,14 @@ window.localStorage.setItem(
 
 console.log(window.localStorage.length);
  */
-const App = () => <Content />;
+const App = () => {
+  const thisIsAPlaceHolder = 'hello';
+  /*   window.onbeforeunload = () => {
+    localStorage.clear();
+  }; */
+
+  return (<Content />);
+};
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
