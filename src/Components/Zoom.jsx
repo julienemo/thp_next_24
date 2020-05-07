@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import SingleNote from './SingleNote';
+import Form from './Form';
 
 
 const Zoom = (select) => (
@@ -12,15 +13,7 @@ const Zoom = (select) => (
         />
       </div>
       <div>
-        <form>
-          <input
-            type="text"
-            placeholder="type something"
-            value={select.title}
-          />
-          <textarea placeholder="type some thing" value={select.content} />
-          <button type="submit">Save</button>
-        </form>
+        <Form {...{ select }} />
       </div>
     </div>
   </>
