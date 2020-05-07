@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import New from './New';
 import SingleNote from './SingleNote';
 
-const Nav = (list) => {
-  const contentToShow = Object.entries(list).map((entry) => {
-    console.log(entry);
-    console.log(entry[0]);
-
-    const note = entry[1];
-    console.log(note);
-
-    return (<div className="single_note"><SingleNote key={entry[0]} {...{ title: note.title, content: note.preview }} /></div>);
-  });
+const Nav = ({ list, click }) => {
+  const contentToShow = Object.entries(list).map((entry) => (
+    <div className="single_note" id={entry[0]} onClick={click} key={entry[0]}>
+      <SingleNote
+        {...{ title: entry[1].title, content: entry[1].preview }}
+      />
+    </div>
+  ));
 
   return (
     <>

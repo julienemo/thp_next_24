@@ -15,16 +15,24 @@ const Content = () => {
       archive[keys[i]] = {
         title: note.title,
         content: note.content,
-        preview: chopString(note.content, 10),
+        preview: chopString(note.content, 15),
       };
     }
     return archive;
   };
 
+  const [list, setList] = useState(originalList());
+  const [select, setSelect] = useState('none');
+
+  const changeSelect = (e) => {
+    setSelect(list[e.target.id]);
+  };
+
+
   return (
     <>
-      <Nav {...originalList()} />
-      <Zoom />
+      <Nav {...{ list: originalList() }} click={changeSelect} />
+      <Zoom {...select} />
     </>
   );
 };

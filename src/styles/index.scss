@@ -37,7 +37,7 @@ button {
 #root {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   min-height: 100vh;
   div {
     background-color: transparent;
@@ -65,15 +65,22 @@ button {
       word-break: break-all;
       margin-bottom: 1rem;
     }
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 .zoom {
-  width: 80%;
-
+  width: 77%;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 23%;
   .preview {
     height: 40%;
-    padding: 0.6rem 2rem;
+    padding: 0 2rem;
+    margin-top: 2rem;
   }
 
   form {
