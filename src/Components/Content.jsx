@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import Nav from './Nav';
-import Zoom from './Zoom';
+
+import SingleNote from './SingleNote';
+import Form from './Form';
 
 const Content = () => {
   const originalList = () => {
@@ -19,23 +22,81 @@ const Content = () => {
 
   const [list, setList] = useState(originalList());
   const [select, setSelect] = useState('none');
+  const [editTitle, setEditTitle] = useState('');
+  const [editContent, setEditContent] = useState('');
+  const [newSubmit, setNewSubmit] = useState(false);
+
+  const streamTitle = (newTitle) => {
+    setNewSubmit(false);
+    setEditTitle(newTitle);
+  };
+
+  const streamContent = (newContent) => {
+    setNewSubmit(false);
+    setEditContent(newContent);
+  };
+
+  const submitNote = (e) => {
+    e.preventDefault();
+    if (editContent || editTitle) {
+      setNewSubmit(true);
+    }
+  };
+
+  useEffect(() => {
+    if (editContent && editTitle && newSubmit) {
+      const now = new Date();
+      const timestamp = moment(now).format('YYYYMMDDhhmmss');
+      window.localStorage.setItem(
+        timestamp,
+        JSON.stringify({ title: editTitle, content: editContent }),
+      );
+      setEditTitle('');
+      setEditContent('');
+    }
+  }, [newSubmit]);
+
+  const display = () => {
+    if (!select.hasOwnProperty('0')) {
+      return {
+        title: select.title,
+        content: select.content,
+      };
+    }
+    return {
+      title: editTitle,
+      content: editContent,
+    };
+  };
+
 
   const changeSelect = (e) => {
-    setSelect(list[e.target.id]);
+    if (e.target.id) {
+      setSelect(list[e.target.id]);
+    }
   };
 
   const clearSelect = () => {
-    setSelect('new');
+    setSelect('create');
   };
 
-  const updateList = (key, title, content) => {
-    setList(list[key] = { title, content });
+  const updateList = (noteKey, newTitle, newContent) => {
+    list[noteKey] = { title: newTitle, content: newContent };
   };
 
   return (
     <>
       <Nav {...{ list }} newclick={clearSelect} click={changeSelect} />
-      <Zoom {...select} updateContentList={updateList} />
+      <div className="zoom">
+        <div className="preview">
+          <SingleNote {...display()} />
+        </div>
+        <div>
+          <Form {...{ select }} onformsubmit={submitNote} updateContentList={updateList} ontitlechange={streamTitle} oncontentchange={streamContent} />
+        </div>
+      </div>
+      {' '}
+
     </>
   );
 };

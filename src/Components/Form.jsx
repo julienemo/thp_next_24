@@ -23,6 +23,7 @@ const Form = ({
     <form onSubmit={(e) => {
       onformsubmit(e);
       const timestamp = moment(new Date()).format('YYYYMMDDhhmmss');
+      updateContentList(timestamp, currentTitle, currentContent);
     }}
     >
       <input
