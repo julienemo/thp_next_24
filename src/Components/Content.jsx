@@ -62,23 +62,11 @@ const Content = () => {
     }
   }, [newSubmit]);
 
-  const display = () => {
-    if (!select.hasOwnProperty('0')) {
-      return {
-        title: select.title,
-        content: select.content,
-      };
-    }
-    return {
-      title: editTitle,
-      content: editContent,
-    };
-  };
-
-
   const changeSelect = (e) => {
     if (e.target.id) {
       setSelect(list[e.target.id]);
+      setEditContent(list[e.target.id].content);
+      setEditTitle(list[e.target.id].title);
     }
   };
 
@@ -95,7 +83,7 @@ const Content = () => {
       <Nav {...{ list }} newclick={clearSelect} click={changeSelect} />
       <div className="zoom">
         <div className="preview">
-          <SingleNote {...display()} />
+          <SingleNote {...{ title: editTitle, content: editContent }} />
         </div>
         <div>
           <Form key={select.title} {...{ select }} onformsubmit={submitNote} updateContentList={updateList} ontitlechange={streamTitle} oncontentchange={streamContent} />
