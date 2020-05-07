@@ -64,6 +64,8 @@ button {
     .single_note {
       word-break: break-all;
       margin-bottom: 1rem;
+      max-height: 10rem;
+      overflow: hidden;
     }
     &:hover {
       cursor: pointer;

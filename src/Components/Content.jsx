@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
 import Zoom from './Zoom';
 
-import { chopString } from '../tools';
-
 const Content = () => {
   const originalList = () => {
     const archive = {};
@@ -14,7 +12,6 @@ const Content = () => {
       archive[keys[i]] = {
         title: note.title,
         content: note.content,
-        preview: note.content,
       };
     }
     return archive;
@@ -28,14 +25,17 @@ const Content = () => {
   };
 
   const clearSelect = () => {
-    console.log('in clear select');
     setSelect('new');
+  };
+
+  const updateList = (key, title, content) => {
+    setList(list[key] = { title, content });
   };
 
   return (
     <>
-      <Nav {...{ list: originalList() }} newclick={clearSelect} click={changeSelect} />
-      <Zoom {...select} />
+      <Nav {...{ list }} newclick={clearSelect} click={changeSelect} />
+      <Zoom {...select} updateContentList={updateList} />
     </>
   );
 };
