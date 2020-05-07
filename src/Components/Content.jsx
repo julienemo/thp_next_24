@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Nav from './Nav';
-import Zoom from './Zoom';
+import React, { useState, useEffect } from "react";
+import Nav from "./Nav";
+import Zoom from "./Zoom";
 
-import { chopString } from '../tools';
-
+import { chopString } from "../tools";
 
 const Content = () => {
   const originalList = () => {
@@ -15,19 +14,18 @@ const Content = () => {
       archive[keys[i]] = {
         title: note.title,
         content: note.content,
-        preview: chopString(note.content, 15),
+        preview: note.content,
       };
     }
     return archive;
   };
 
   const [list, setList] = useState(originalList());
-  const [select, setSelect] = useState('none');
+  const [select, setSelect] = useState("none");
 
   const changeSelect = (e) => {
     setSelect(list[e.target.id]);
   };
-
 
   return (
     <>
@@ -36,6 +34,5 @@ const Content = () => {
     </>
   );
 };
-
 
 export default Content;

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Showdown from "showdown";
 
-const SingleNote = ({
-  title, content,
-}) => {
-  const five = '5';
+const SingleNote = ({ title, content }) => {
+  const converter = new Showdown.Converter();
+  const creatMD = { __html: content ? converter.makeHtml(content) : "" };
   // const [currentTitle, setCurrentTitle] = useState(title);
   // console.log(currentTitle);
 
@@ -13,10 +13,9 @@ const SingleNote = ({
   return (
     <>
       <h6 className="note_title">{title}</h6>
-      <p>{content}</p>
+      <div dangerouslySetInnerHTML={creatMD} />
     </>
   );
 };
-
 
 export default SingleNote;

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 const Form = ({ select }) => {
   const [currentTitle, setCurrentTitle] = useState(select.title);
@@ -6,10 +7,7 @@ const Form = ({ select }) => {
 
   // setCurrentContent(select.content);
 
-
   const changeTitle = (e) => {
-    console.log('in change title');
-    console.log(e.target.value);
     setCurrentTitle(e.target.value);
   };
 
@@ -17,14 +15,33 @@ const Form = ({ select }) => {
     setCurrentContent(e.target.value);
   };
 
+  const saveChange = (e) => {
+    e.preventDefault();
+    const now = new Date();
+    const timestamp = moment(now).format("YYYYMMDDhhmmss");
+    const title = currentTitle;
+    const content = currentContent;
+    console.log(title);
+    console.log(content);
+    console.log(timestamp);
+    window.localStorage.setItem(timestamp, JSON.stringify({ title, content }));
+  };
   return (
-    <form>
-      <input type="text" placeholder="type something" value={select.title} />
-      <textarea placeholder="type some thing" value={select.content} />
+    <form onSubmit={saveChange}>
+      <input
+        type="text"
+        placeholder="type something"
+        onChange={changeTitle}
+        value={currentTitle}
+      />
+      <textarea
+        placeholder="type some thing"
+        onChange={changeContent}
+        value={currentContent}
+      />
       <button type="submit">Save</button>
     </form>
   );
 };
-
 
 export default Form;
