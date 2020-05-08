@@ -23,6 +23,13 @@ _Uncomment `index.jsx` to inject some notes into browser or clear storage_
 
 1. Are we sure that event handling(with arguments other than `e` ) only pass from parent to child ? Not with one level in the middle?
 
+* Saw something from Hadrien and Carolin which might have helped:
+* In parent, `<MarkdownInput triggerSetNote={(input) => setNote(input)}/>
+* In child, ```const handleClick = (e) => {
+		e.preventDefault();
+		triggerSetNote(input);
+	};```
+
 2. How to remove the blue outline on a button when it is clicked ?
 
 3. How to not trigger `overflow: scroll;` when there is no overflow yet ? 
